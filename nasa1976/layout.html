@@ -1,0 +1,76 @@
+{%- extends "basic/layout.html" %}
+
+{%- block extrahead %}
+  {{ super() }}
+  <meta name="color-scheme" content="light dark">
+{%- endblock %}
+
+{# The basic theme's relbars are chrome the manual would not permit. #}
+{%- block relbar1 %}{% endblock %}
+{%- block relbar2 %}{% endblock %}
+
+{%- block header %}
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="nasa-masthead">
+  <div class="nasa-masthead-inner">
+    <p class="nasa-program">{{ theme_program_label }}</p>
+    <p class="nasa-sitetitle">
+      <a href="{{ pathto(root_doc) }}">{{ shorttitle|e }}</a>
+      {%- if release %}<span class="nasa-release">{{ release|e }}</span>{% endif %}
+    </p>
+  </div>
+</header>
+{%- endblock %}
+
+{%- block content %}
+<div class="nasa-page">
+
+  <input type="checkbox" id="nasa-nav-toggle" class="nasa-nav-toggle" hidden>
+  <label for="nasa-nav-toggle" class="nasa-nav-button">Contents</label>
+
+  {%- block sidebar1 %}
+  <aside class="nasa-margin" id="nasa-nav">
+    {%- block sidebarlogo %}
+    {%- if logo_url %}
+    <p class="nasa-logo"><img src="{{ logo_url }}" alt="{{ shorttitle|e }}"></p>
+    {%- endif %}
+    {%- endblock %}
+    {{ sidebar() }}
+  </aside>
+  {%- endblock %}
+
+  <main class="nasa-body" id="main-content" role="main">
+    {%- block body %}{% endblock %}
+
+    <nav class="nasa-seq" aria-label="Sequence">
+      {%- if prev %}
+      <a class="nasa-seq-prev" href="{{ prev.link|e }}">
+        <span class="nasa-seq-label">Previous</span>
+        <span class="nasa-seq-title">{{ prev.title }}</span>
+      </a>
+      {%- endif %}
+      {%- if next %}
+      <a class="nasa-seq-next" href="{{ next.link|e }}">
+        <span class="nasa-seq-label">Next</span>
+        <span class="nasa-seq-title">{{ next.title }}</span>
+      </a>
+      {%- endif %}
+    </nav>
+  </main>
+</div>
+{%- endblock %}
+
+{%- block footer %}
+<footer class="nasa-footer">
+  <div class="nasa-footer-inner">
+    <p class="nasa-footer-doc">
+      {%- if theme_document_number %}{{ theme_document_number }}{% endif %}
+      {%- if theme_revision %}<span class="nasa-footer-rev">{{ theme_revision }}</span>{% endif %}
+    </p>
+    <p class="nasa-footer-meta">
+      {%- if show_copyright and copyright %}&copy; {{ copyright }}{% endif %}
+      {%- if last_updated %}<span>Updated {{ last_updated }}</span>{% endif %}
+    </p>
+  </div>
+</footer>
+{%- endblock %}

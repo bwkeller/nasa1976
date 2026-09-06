@@ -1,0 +1,21 @@
+[theme]
+inherit = "basic"
+stylesheets = ["nasa1976.css"]
+sidebars = [
+    "globaltoc.html",
+    "searchbox.html",
+]
+pygments_style_default = "tango"
+pygments_style_dark = "native"
+
+[options]
+# Text shown in the small margin column above the site title on every page.
+program_label = "Unified Visual Communications"
+# Document number printed in the footer, in the manner of NHB 1430.2.
+document_number = ""
+# Revision / date line printed in the footer.
+revision = ""
+# Set to "false" to drop the red cover band from the landing page.
+show_masthead_band = "true"
+# Accent used for links and rules. Any CSS colour.
+accent_color = "#e4002b"

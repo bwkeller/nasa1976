@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sphinx-nasa1976"
+version = "1.0.0"
+description = "A Sphinx theme after the 1976 NASA Graphics Standards Manual"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["sphinx>=6.0"]
+classifiers = [
+    "Framework :: Sphinx",
+    "Framework :: Sphinx :: Theme",
+    "Topic :: Documentation :: Sphinx",
+]
+
+[project.entry-points."sphinx.html_themes"]
+nasa1976 = "nasa1976"
+
+[tool.setuptools]
+packages = ["nasa1976"]
+
+[tool.setuptools.package-data]
+nasa1976 = ["theme.toml", "*.html", "static/*"]
