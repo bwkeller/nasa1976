@@ -35,6 +35,7 @@ html_theme_options = {
     "document_number": "NHB 1430.2",         # footer, left
     "revision": "January 1976",              # footer, beside the number
     "accent_color": "#e4002b",               # links, rules, warning labels
+    "color_scheme": "auto",                  # "auto", "light", or "dark"
 }
 ```
 
@@ -60,7 +61,8 @@ has rounded corners. Admonitions are hairline frames with a solid label bar.
 
 **Dark mode** via `prefers-color-scheme`, inverting to white on black, matching
 the deck's closing plate and the `nasa-1976-inverted` aquarel theme. Pygments
-switches to `native` automatically.
+switches to `native` automatically. Set `color_scheme` to `"light"` or `"dark"`
+to fix the scheme regardless of the reader's system preference.
 
 ## Type
 

@@ -1,8 +1,35 @@
 {%- extends "basic/layout.html" %}
 
+{%- set nasa_scheme = theme_color_scheme if theme_color_scheme in ("light", "dark") else "auto" %}
+
 {%- block extrahead %}
   {{ super() }}
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="{{ 'light dark' if nasa_scheme == 'auto' else nasa_scheme }}">
+{%- endblock %}
+
+{#- Sphinx ships pygments.css plus pygments_dark.css behind a media query.
+    When the scheme is fixed, emit only the matching one, unconditionally. #}
+{%- block css %}
+  {%- if nasa_scheme == "auto" %}
+    {{- super() }}
+  {%- else %}
+    {%- for css in css_files %}
+      {%- set fname = css|attr("filename") or css %}
+      {%- if fname == "_static/pygments.css" %}
+        {%- if nasa_scheme == "light" %}
+    <link rel="stylesheet" href="{{ pathto(fname, 1)|e }}" type="text/css" />
+        {%- endif %}
+      {%- elif fname == "_static/pygments_dark.css" %}
+        {%- if nasa_scheme == "dark" %}
+    <link rel="stylesheet" href="{{ pathto(fname, 1)|e }}" type="text/css" />
+        {%- endif %}
+      {%- elif css|attr("filename") %}
+    {{ css_tag(css) }}
+      {%- else %}
+    <link rel="stylesheet" href="{{ pathto(css, 1)|e }}" type="text/css" />
+      {%- endif %}
+    {%- endfor %}
+  {%- endif %}
 {%- endblock %}
 
 {# The basic theme's relbars are chrome the manual would not permit. #}

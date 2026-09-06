@@ -35,7 +35,7 @@ Three registration paths exist and must stay consistent:
 
 - **`nasa1976/theme.toml`** — inherits `basic`; declares the stylesheet, default sidebars (`globaltoc.html`, `searchbox.html`), Pygments styles (`tango` light / `native` dark), and the `[options]` block. Every key under `[options]` becomes a `theme_<key>` Jinja variable available in both `layout.html` and the CSS template.
 - **`nasa1976/layout.html`** — extends `basic/layout.html`. Blanks `relbar1`/`relbar2`, replaces `header`, `content`, and `footer`. Layout is a two-column CSS grid (`.nasa-margin` sidebar + `.nasa-body`). The mobile nav toggle is a pure-CSS checkbox (`#nasa-nav-toggle`), so there is deliberately no JavaScript.
-- **`nasa1976/static/nasa1976.css_t`** — the `_t` suffix makes Sphinx render it as a Jinja template at build time. The only templated value is `{{ theme_accent_color }}` feeding `--nasa-red`. Everything else is driven by CSS custom properties defined in `:root`, with a `prefers-color-scheme: dark` override block that swaps the neutral tokens.
+- **`nasa1976/static/nasa1976.css_t`** — the `_t` suffix makes Sphinx render it as a Jinja template at build time. `{{ theme_accent_color }}` feeds `--nasa-red`, and `theme_color_scheme` decides how the dark token block is emitted: behind a `prefers-color-scheme: dark` media query (`auto`), unconditionally (`dark`), or not at all (`light`). `layout.html` mirrors the same option in the `color-scheme` meta tag and, when the scheme is fixed, overrides the `css` block so only the matching Pygments stylesheet (`pygments.css` or `pygments_dark.css`) is linked, without Sphinx's media query. Everything else is driven by CSS custom properties defined in `:root`.
 
 ### Design constraints to preserve
 

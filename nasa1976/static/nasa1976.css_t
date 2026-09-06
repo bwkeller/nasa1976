@@ -26,8 +26,9 @@
   --nasa-pad: 2.25rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+{#- The inverted plate: white on black. Applied by media query when
+    color_scheme is "auto", unconditionally when "dark", never when "light". #}
+{%- macro dark_tokens() %}
     --nasa-bg: #000000;
     --nasa-paper: #141414;
     --nasa-text: #ffffff;
@@ -35,8 +36,18 @@
     --nasa-mute: #9a9a94;
     --nasa-rule: #ffffff;
     --nasa-hairline: #3a3a3a;
+{%- endmacro %}
+{%- if theme_color_scheme == "dark" %}
+:root {
+{{ dark_tokens() }}
+}
+{%- elif theme_color_scheme != "light" %}
+@media (prefers-color-scheme: dark) {
+  :root {
+{{ dark_tokens() }}
   }
 }
+{%- endif %}
 
 /* ---------- reset-ish ---------- */
 

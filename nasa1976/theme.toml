@@ -5,8 +5,7 @@ sidebars = [
     "globaltoc.html",
     "searchbox.html",
 ]
-pygments_style_default = "tango"
-pygments_style_dark = "native"
+pygments_style = { default = "tango", dark = "native" }
 
 [options]
 # Text shown in the small margin column above the site title on every page.
@@ -19,3 +18,5 @@ revision = ""
 show_masthead_band = "true"
 # Accent used for links and rules. Any CSS colour.
 accent_color = "#e4002b"
+# "auto" follows the reader's prefers-color-scheme; "light" or "dark" fixes it.
+color_scheme = "auto"
