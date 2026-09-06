@@ -7,7 +7,7 @@ themes: same palette, same Futura stack, same flush-left grid.
 ## Install
 
 ```bash
-pip install ./nasa1976_sphinx
+pip install .
 ```
 
 Then in `conf.py`:
@@ -17,11 +17,13 @@ html_theme = "nasa1976"
 ```
 
 The package registers itself through the `sphinx.html_themes` entry point, so
-no `html_theme_path` is needed. To use the folder directly without installing:
+no `html_theme_path` is needed. To use the checkout directly without installing,
+point `html_theme_path` at the repository root (the directory that contains the
+`nasa1976/` package folder):
 
 ```python
 import os
-html_theme_path = [os.path.abspath("path/to/nasa1976_sphinx")]
+html_theme_path = [os.path.abspath("path/to/nasa1976-repo")]
 html_theme = "nasa1976"
 ```
 
